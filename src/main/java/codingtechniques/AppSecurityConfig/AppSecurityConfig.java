@@ -26,15 +26,13 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
 import codingtechniques.Filter.JWTFilter;
 
 @Configuration
 @SpringBootApplication
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
-@EnableWebMvc
+
 public class AppSecurityConfig {
 
     @Bean
@@ -54,7 +52,7 @@ public class AppSecurityConfig {
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/token/**").permitAll()
+                        .requestMatchers("/registerReservation,/addReservation").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(Customizer.withDefaults())
@@ -67,7 +65,7 @@ public class AppSecurityConfig {
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails reponsable = User.builder().username("responsable")
                 .password("responsable")
-                .roles("ROLE_responsable")
+                .roles("ROLE_ADMIN")
                 .build();
 
         return new InMemoryUserDetailsManager(reponsable);
@@ -99,7 +97,7 @@ public class AppSecurityConfig {
                 "DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/registerReservation,/addReservation", configuration);
         return source;
     }
   

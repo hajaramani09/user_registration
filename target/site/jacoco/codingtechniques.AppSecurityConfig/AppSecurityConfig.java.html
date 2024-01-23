@@ -26,79 +26,81 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
 import codingtechniques.Filter.JWTFilter;
 
 @Configuration
 @SpringBootApplication
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
-
-<span class="nc" id="L36">public class AppSecurityConfig {</span>
+@EnableWebMvc
+<span class="nc" id="L38">public class AppSecurityConfig {</span>
 
     @Bean
     public SecurityFilterChain apiSecurity(HttpSecurity http) throws Exception {
 
-<span class="nc" id="L41">        http.authorizeHttpRequests(</span>
-<span class="nc" id="L42">                (auth) -&gt; auth.requestMatchers(&quot;/responsble&quot;).hasRole(&quot;ROLE_responsable&quot;)</span>
-<span class="nc" id="L43">                        .anyRequest()</span>
-<span class="nc" id="L44">                        .authenticated())</span>
-<span class="nc" id="L45">                .httpBasic(Customizer.withDefaults());</span>
+<span class="nc" id="L43">        http.authorizeHttpRequests(</span>
+<span class="nc" id="L44">                (auth) -&gt; auth.requestMatchers(&quot;/responsble&quot;).hasRole(&quot;ROLE_responsable&quot;)</span>
+<span class="nc" id="L45">                        .anyRequest()</span>
+<span class="nc" id="L46">                        .authenticated())</span>
+<span class="nc" id="L47">                .httpBasic(Customizer.withDefaults());</span>
 
-<span class="nc" id="L47">        return http.build();</span>
+<span class="nc" id="L49">        return http.build();</span>
 
     }
 
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-<span class="nc" id="L52">        return httpSecurity</span>
-<span class="nc" id="L53">                .csrf(csrf -&gt; csrf.disable())</span>
-<span class="nc" id="L54">                .authorizeHttpRequests(auth -&gt; auth</span>
-<span class="nc" id="L55">                        .requestMatchers(&quot;/token/**&quot;).permitAll()</span>
-<span class="nc" id="L56">                        .anyRequest().authenticated())</span>
-<span class="nc" id="L57">                .sessionManagement(sess -&gt; sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))</span>
-<span class="nc" id="L58">                .oauth2ResourceServer(Customizer.withDefaults())</span>
-<span class="nc" id="L59">                .httpBasic(Customizer.withDefaults())</span>
-<span class="nc" id="L60">                .build();</span>
+<span class="nc" id="L54">        return httpSecurity</span>
+<span class="nc" id="L55">                .csrf(csrf -&gt; csrf.disable())</span>
+<span class="nc" id="L56">                .authorizeHttpRequests(auth -&gt; auth</span>
+<span class="nc" id="L57">                        .requestMatchers(&quot;/token/**&quot;).permitAll()</span>
+<span class="nc" id="L58">                        .anyRequest().authenticated())</span>
+<span class="nc" id="L59">                .sessionManagement(sess -&gt; sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))</span>
+<span class="nc" id="L60">                .oauth2ResourceServer(Customizer.withDefaults())</span>
+<span class="nc" id="L61">                .httpBasic(Customizer.withDefaults())</span>
+<span class="nc" id="L62">                .build();</span>
     }
 
     @Bean
 
     public InMemoryUserDetailsManager userDetailsService() {
-<span class="nc" id="L66">        UserDetails reponsable = User.builder().username(&quot;responsable&quot;)</span>
-<span class="nc" id="L67">                .password(&quot;responsable&quot;)</span>
-<span class="nc" id="L68">                .roles(&quot;ROLE_responsable&quot;)</span>
-<span class="nc" id="L69">                .build();</span>
+<span class="nc" id="L68">        UserDetails reponsable = User.builder().username(&quot;responsable&quot;)</span>
+<span class="nc" id="L69">                .password(&quot;responsable&quot;)</span>
+<span class="nc" id="L70">                .roles(&quot;ROLE_responsable&quot;)</span>
+<span class="nc" id="L71">                .build();</span>
 
-<span class="nc" id="L71">        return new InMemoryUserDetailsManager(reponsable);</span>
+<span class="nc" id="L73">        return new InMemoryUserDetailsManager(reponsable);</span>
     }
 
     @Bean
     @ConditionalOnMissingBean(AuthenticationEventPublisher.class)
     DefaultAuthenticationEventPublisher defaultAuthenticationEventPublisher(ApplicationEventPublisher delegate) {
-<span class="nc" id="L77">        return new DefaultAuthenticationEventPublisher(delegate);</span>
+<span class="nc" id="L79">        return new DefaultAuthenticationEventPublisher(delegate);</span>
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-<span class="nc" id="L82">        return new BCryptPasswordEncoder();</span>
+<span class="nc" id="L84">        return new BCryptPasswordEncoder();</span>
     }
 
     @Bean
     public RegistrationBean jwtAuthFilterRegister(JWTFilter filter) {
-<span class="nc" id="L87">        FilterRegistrationBean&lt;JWTFilter&gt; registrationBean = new FilterRegistrationBean&lt;&gt;(filter);</span>
-<span class="nc" id="L88">        registrationBean.setEnabled(false);</span>
-<span class="nc" id="L89">        return registrationBean;</span>
+<span class="nc" id="L89">        FilterRegistrationBean&lt;JWTFilter&gt; registrationBean = new FilterRegistrationBean&lt;&gt;(filter);</span>
+<span class="nc" id="L90">        registrationBean.setEnabled(false);</span>
+<span class="nc" id="L91">        return registrationBean;</span>
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-<span class="nc" id="L94">        CorsConfiguration configuration = new CorsConfiguration();</span>
-<span class="nc" id="L95">        configuration.setAllowedOrigins(Arrays.asList(&quot;*&quot;));</span>
-<span class="nc" id="L96">        configuration.setAllowedMethods(Arrays.asList(&quot;GET&quot;, &quot;POST&quot;, &quot;PUT&quot;,</span>
-                &quot;DELETE&quot;));
-<span class="nc" id="L98">        configuration.setAllowedHeaders(Arrays.asList(&quot;*&quot;));</span>
-<span class="nc" id="L99">        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();</span>
-<span class="nc" id="L100">        source.registerCorsConfiguration(&quot;/**&quot;, configuration);</span>
-<span class="nc" id="L101">        return source;</span>
+<span class="nc" id="L96">        CorsConfiguration configuration = new CorsConfiguration();</span>
+<span class="nc" id="L97">        configuration.setAllowedOrigins(Arrays.asList(&quot;*&quot;));</span>
+<span class="nc" id="L98">        configuration.setAllowedMethods(Arrays.asList(&quot;GET&quot;, &quot;POST&quot;, &quot;PUT&quot;,</span>
+<span class="nc" id="L99">                &quot;DELETE&quot;));</span>
+<span class="nc" id="L100">        configuration.setAllowedHeaders(Arrays.asList(&quot;*&quot;));</span>
+<span class="nc" id="L101">        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();</span>
+<span class="nc" id="L102">        source.registerCorsConfiguration(&quot;/**&quot;, configuration);</span>
+<span class="nc" id="L103">        return source;</span>
     }
   
 

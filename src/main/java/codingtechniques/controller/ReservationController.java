@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @RestController
-@RequestMapping("/reservation")
+
 
 @Component
 
@@ -38,13 +38,6 @@ public class ReservationController {
 
     @Autowired
     public Reservation reservation;
-
-   @GetMapping("/")
-
-    public String index(Model model) {
-        model.addAttribute("reservation", new Reservation());
-        return "index";
-    }
 
    @GetMapping("/registerReservation")
     public ResponseEntity<Reservation> registerReservation(@ModelAttribute Reservation user, Model model) {

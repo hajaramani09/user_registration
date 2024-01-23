@@ -20,7 +20,6 @@ import lombok.AllArgsConstructor;
 @RestController
 @AllArgsConstructor
 
-@RequestMapping("/responsable")
 public class ResponsableController {
 
 	@Autowired

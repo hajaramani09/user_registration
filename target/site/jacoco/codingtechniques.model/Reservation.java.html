@@ -19,7 +19,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = &quot;reservation&quot;)
-@Getter
+<span class="nc" id="L22">@Getter</span>
 <span class="nc" id="L23">@Setter</span>
 
 public class Reservation implements Serializable {
@@ -51,7 +51,7 @@ public class Reservation implements Serializable {
     @JsonFormat(pattern = &quot;yyyy-MM-dd&quot;)
     @Column(name = &quot;dR&quot;)
     @NotNull(message = &quot;La date est un champ obligatoire&quot;)
-<span class="nc" id="L54">    private Date dR;</span>
+    private Date dR;
 
     @Column(name = &quot;note&quot;)
     @NotNull(message = &quot;La description est un champ obligatoire&quot;)
@@ -62,8 +62,8 @@ public class Reservation implements Serializable {
     @NotNull(message = &quot;la sélection d'un service est obligatoire&quot;)
     private Service service;
 
-    public Reservation(int id, String name, String Adress, String phone, String email, Date dR, String note,
-<span class="nc" id="L66">            Service service) {</span>
+<span class="nc" id="L65">    public Reservation(int id, String name, String Adress, String phone, String email, Date dR, String note,</span>
+            Service service) {
 <span class="nc" id="L67">        this.id = id;</span>
 <span class="nc" id="L68">        this.name = name;</span>
 <span class="nc" id="L69">        this.Adress = Adress;</span>
@@ -141,7 +141,7 @@ public class Reservation implements Serializable {
     @Override
     public String toString() {
 <span class="nc" id="L143">        return &quot;Reservation [id=&quot; + id + &quot;, name=&quot; + name + &quot;, Adress=&quot; + Adress + &quot;, phone=&quot; + phone + &quot;, email=&quot;</span>
-                + email + &quot;, dR=&quot; + dR + &quot;, note=&quot; + note + &quot;, Service=&quot; + service + &quot;]&quot;;
+<span class="nc" id="L144">                + email + &quot;, dR=&quot; + dR + &quot;, note=&quot; + note + &quot;, Service=&quot; + service + &quot;]&quot;;</span>
     }
 
 }
