@@ -1,4 +1,4 @@
-<pre>
+
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:tx="http://www.springframework.org/schema/tx"
@@ -54,8 +54,5 @@
     <tx:jta-transaction-manager />
     <tx:annotation-driven />
     <mvc:annotation-driven />
-
-
-
 </beans>
-</pre>
+

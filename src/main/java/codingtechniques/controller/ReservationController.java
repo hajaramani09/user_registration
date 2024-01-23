@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @RestController
-@RequestMapping("/reservation")
+@RequestMapping("/")
 
 @Component
 
