@@ -7,9 +7,9 @@ codingtechniques\controller\ReservationController.class
 codingtechniques\UserRegistrationApplication.class
 codingtechniques\Servlet\ReservationServlet.class
 codingtechniques\controller\ResponsableController.class
-codingtechniques\WebMvcConfig\WebMvcConfig$1.class
 codingtechniques\Filter\JWTFilter.class
 codingtechniques\WebMvcConfig\WebMvcConfig.class
+codingtechniques\AppSecurityConfig\JpaConfig.class
 codingtechniques\model\Service.class
 codingtechniques\repositories\ReservationRepository.class
 codingtechniques\AppSecurityConfig\ApiAuthenticationEntryPoint.class

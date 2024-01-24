@@ -9,6 +9,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.web.servlet.DelegatingFilterProxyRegistrationBean;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletContextInitializerBeans;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
@@ -16,9 +22,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 @Transactional
 @Component
-
 @Order(1)
-// Indique l'ordre d'exécution du filtre
+
 public class JWTFilter extends OncePerRequestFilter {
 	private static final Log LOG = LogFactory.getLog(JWTFilter.class);
 
@@ -29,13 +34,13 @@ public class JWTFilter extends OncePerRequestFilter {
 		Collections.list(req.getHeaderNames()).forEach((header -> {
 			LOG.info("Header :{}={}" + header + req.getHeader(header));
 		}));
-		// Logique du filtre à cet endroit
+
 		try {
 			LOG.info("Démarrage d'une transaction pour demande : {}" + req.getRequestURI());
-			// Logique du filtre à cet endroit
+
 			chain.doFilter(req, res);
 			LOG.info("Validation d'une transaction pour demande :{}" + req.getRequestURI());
-			// Logique du filtre à cet endroit
+
 			LOG.info("Demande de journalisation {}: " + req.getMethod() + req.getRequestURI());
 			LOG.info("Réponse de journalisation : {}" + res.getContentType());
 		} catch (Exception e) {
@@ -46,5 +51,16 @@ public class JWTFilter extends OncePerRequestFilter {
 		chain.doFilter(req, res);
 
 	}
+	@Bean
+public CommandLineRunner cmdLineRunner(ApplicationContext context) {
+    return args -> {
+        ServletContextInitializerBeans scib = new ServletContextInitializerBeans(context,
+                FilterRegistrationBean.class, DelegatingFilterProxyRegistrationBean.class);
+        System.out.println("----");
+        scib.iterator().forEachRemaining(s -> {
+            System.out.println(s);
+        });
+    };
+}
 
 }

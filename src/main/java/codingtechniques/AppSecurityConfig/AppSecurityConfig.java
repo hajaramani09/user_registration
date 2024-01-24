@@ -52,7 +52,7 @@ public class AppSecurityConfig {
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/registerReservation,/addReservation").permitAll()
+                        .requestMatchers("/token/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(Customizer.withDefaults())
@@ -65,7 +65,7 @@ public class AppSecurityConfig {
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails reponsable = User.builder().username("responsable")
                 .password("responsable")
-                .roles("ROLE_ADMIN")
+                .roles("ROLE_responsable")
                 .build();
 
         return new InMemoryUserDetailsManager(reponsable);
@@ -97,7 +97,7 @@ public class AppSecurityConfig {
                 "DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/registerReservation,/addReservation", configuration);
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
   

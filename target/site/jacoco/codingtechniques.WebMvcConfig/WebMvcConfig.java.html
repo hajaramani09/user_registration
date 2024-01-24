@@ -2,7 +2,6 @@
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -13,38 +12,30 @@ import jakarta.annotation.Nonnull;
 
 
 @Nonnull
-@Configuration
 @EnableWebMvc
-<span class="nc" id="L18">public class WebMvcConfig implements WebMvcConfigurer{</span>
-   
-    
-    
-   @Bean
-   public WebMvcConfigurer corsConfigurer() {
-<span class="nc" id="L24">        return new WebMvcConfigurer() {</span>
-            @Override
-           
-            public void addCorsMappings(@NonNull CorsRegistry registry) {
-<span class="nc" id="L28">                registry.addMapping(&quot;/**&quot;)</span>
-<span class="nc" id="L29">                        .allowedOrigins(&quot;*&quot;)</span>
-<span class="nc" id="L30">                        .allowedMethods(&quot;*&quot;)</span>
-<span class="nc" id="L31">                        .allowedHeaders(&quot;*&quot;)</span>
-<span class="nc" id="L32">                        .allowCredentials(true);</span>
-<span class="nc" id="L33">            }</span>
-        };
-    }
+@Configuration
+<span class="nc" id="L17">public class WebMvcConfig implements WebMvcConfigurer {</span>
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+<span class="nc" id="L21">        registry.addMapping(&quot;/**&quot;)</span>
+<span class="nc" id="L22">                .allowedOrigins(&quot;*&quot;)</span>
+<span class="nc" id="L23">                .allowedMethods(&quot;*&quot;)</span>
+<span class="nc" id="L24">                .allowedHeaders(&quot;*&quot;)</span>
+<span class="nc" id="L25">                .allowCredentials(true);</span>
+<span class="nc" id="L26">    }</span>
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+<span class="nc" id="L30">        configurer.enable();</span>
+<span class="nc" id="L31">    }</span>
 
 
-     @Override
-
-    public void configureDefaultServletHandling(@NonNull DefaultServletHandlerConfigurer configurer) {
-<span class="nc" id="L41">        configurer.enable();</span>
-<span class="nc" id="L42">    }</span>
 
     
   @Bean
     public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
-<span class="nc" id="L47">        return new RequestMappingHandlerAdapter();</span>
+<span class="nc" id="L38">        return new RequestMappingHandlerAdapter();</span>
     }
     
 }

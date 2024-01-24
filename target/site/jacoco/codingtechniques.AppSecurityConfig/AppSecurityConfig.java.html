@@ -52,7 +52,7 @@ import codingtechniques.Filter.JWTFilter;
 <span class="nc" id="L52">        return httpSecurity</span>
 <span class="nc" id="L53">                .csrf(csrf -&gt; csrf.disable())</span>
 <span class="nc" id="L54">                .authorizeHttpRequests(auth -&gt; auth</span>
-<span class="nc" id="L55">                        .requestMatchers(&quot;/registerReservation,/addReservation&quot;).permitAll()</span>
+<span class="nc" id="L55">                        .requestMatchers(&quot;/token/**&quot;).permitAll()</span>
 <span class="nc" id="L56">                        .anyRequest().authenticated())</span>
 <span class="nc" id="L57">                .sessionManagement(sess -&gt; sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))</span>
 <span class="nc" id="L58">                .oauth2ResourceServer(Customizer.withDefaults())</span>
@@ -65,7 +65,7 @@ import codingtechniques.Filter.JWTFilter;
     public InMemoryUserDetailsManager userDetailsService() {
 <span class="nc" id="L66">        UserDetails reponsable = User.builder().username(&quot;responsable&quot;)</span>
 <span class="nc" id="L67">                .password(&quot;responsable&quot;)</span>
-<span class="nc" id="L68">                .roles(&quot;ROLE_ADMIN&quot;)</span>
+<span class="nc" id="L68">                .roles(&quot;ROLE_responsable&quot;)</span>
 <span class="nc" id="L69">                .build();</span>
 
 <span class="nc" id="L71">        return new InMemoryUserDetailsManager(reponsable);</span>
@@ -97,7 +97,7 @@ import codingtechniques.Filter.JWTFilter;
                 &quot;DELETE&quot;));
 <span class="nc" id="L98">        configuration.setAllowedHeaders(Arrays.asList(&quot;*&quot;));</span>
 <span class="nc" id="L99">        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();</span>
-<span class="nc" id="L100">        source.registerCorsConfiguration(&quot;/registerReservation,/addReservation&quot;, configuration);</span>
+<span class="nc" id="L100">        source.registerCorsConfiguration(&quot;/**&quot;, configuration);</span>
 <span class="nc" id="L101">        return source;</span>
     }
   
