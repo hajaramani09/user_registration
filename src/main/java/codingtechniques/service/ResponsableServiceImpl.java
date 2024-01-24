@@ -21,13 +21,13 @@ public class ResponsableServiceImpl {
 
     static {
         try {
-            Class.forName("com.mysql.cj.jdbc.driver"); // Utilisez le driver JDBC correct pour MySQL
+            Class.forName("com.mysql.cj.jdbc.driver"); 
         } catch (Exception e) {
-            e.printStackTrace(); // Affichez l'exception pour le débogage
+            e.printStackTrace(); 
         }
     }
 
-    // Ajoutez les informations de la base de données à l'URL
+   
 
     public void closeConnection(Connection connection) {
         try {

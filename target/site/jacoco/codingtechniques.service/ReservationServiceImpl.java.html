@@ -27,8 +27,8 @@ import codingtechniques.repositories.ReservationRepository;
             
 <span class="nc" id="L28">        } catch (Exception e) {</span>
 <span class="nc" id="L29">            e.printStackTrace();</span>
-        }
-    }
+<span class="nc" id="L30">        }</span>
+<span class="nc" id="L31">    }</span>
 
     // Ajoutez les informations de la base de données à l'URL
 
@@ -46,11 +46,11 @@ import codingtechniques.repositories.ReservationRepository;
             }
 <span class="nc" id="L47">        } catch (SQLException ex) {</span>
 <span class="nc" id="L48">            ex.printStackTrace();</span>
-        }
+<span class="nc" id="L49">        }</span>
 <span class="nc" id="L50">    }</span>
 
     @Autowired
-<span class="nc" id="L53">    static ReservationRepository userInterface;</span>
+    static ReservationRepository userInterface;
 
     public List&lt;Reservation&gt; getReservation() {
 <span class="nc" id="L56">        List&lt;Reservation&gt; users = new ArrayList&lt;Reservation&gt;();</span>

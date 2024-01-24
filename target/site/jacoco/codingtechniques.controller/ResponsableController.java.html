@@ -20,7 +20,6 @@ import lombok.AllArgsConstructor;
 @RestController
 <span class="nc" id="L21">@AllArgsConstructor</span>
 
-@RequestMapping(&quot;/responsable&quot;)
 public class ResponsableController {
 
 	@Autowired
@@ -28,32 +27,32 @@ public class ResponsableController {
 
 	@RequestMapping(method = RequestMethod.POST, value = &quot;/addUser&quot;)
 	public ResponseEntity&lt;Responsable&gt; addUser(@Validated @RequestBody Responsable user) {
-<span class="nc" id="L31">		return new ResponseEntity&lt;Responsable&gt;(userService.addUser(user), null, HttpStatus.CREATED);</span>
+<span class="nc" id="L30">		return new ResponseEntity&lt;Responsable&gt;(userService.addUser(user), null, HttpStatus.CREATED);</span>
 
 	}
 
 	@PreAuthorize(&quot;hasRole('ADMIN')&quot;)
 	@RequestMapping(&quot;/getUser&quot;)
 	public List&lt;Responsable&gt; getUser() {
-<span class="nc" id="L38">		return userService.getUsers();</span>
+<span class="nc" id="L37">		return userService.getUsers();</span>
 	}
 
 	@GetMapping(&quot;/getMe&quot;)
 	public Responsable getMe() {
-<span class="nc" id="L43">		return userService.getUser(userService.getAuthUser());</span>
+<span class="nc" id="L42">		return userService.getUser(userService.getAuthUser());</span>
 	}
 
 	@PreAuthorize(&quot;hasRole('ADMIN')&quot;)
 	@RequestMapping(method = RequestMethod.PUT, value = &quot;/responsable{IdR}&quot;)
 	public ResponseEntity&lt;Responsable&gt; updateUser(@PathVariable Integer userId, @RequestBody Responsable user) {
-<span class="nc" id="L49">		return new ResponseEntity&lt;Responsable&gt;(userService.updateUser(userId, user), null, HttpStatus.OK);</span>
+<span class="nc" id="L48">		return new ResponseEntity&lt;Responsable&gt;(userService.updateUser(userId, user), null, HttpStatus.OK);</span>
 	}
 
 	@PreAuthorize(&quot;hasRole('ADMIN')&quot;)
 	@RequestMapping(method = RequestMethod.DELETE, value = &quot;/responsable/{IdR}&quot;)
 	public ResponseEntity&lt;Responsable&gt; deleteUser(@PathVariable Integer userId) {
-<span class="nc" id="L55">		userService.deleteUser(userId);</span>
-<span class="nc" id="L56">		return new ResponseEntity&lt;Responsable&gt;(null, null, HttpStatus.OK);</span>
+<span class="nc" id="L54">		userService.deleteUser(userId);</span>
+<span class="nc" id="L55">		return new ResponseEntity&lt;Responsable&gt;(null, null, HttpStatus.OK);</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

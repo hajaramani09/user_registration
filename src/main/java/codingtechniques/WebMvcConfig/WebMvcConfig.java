@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import jakarta.annotation.Nonnull;
 
@@ -40,5 +41,10 @@ public class WebMvcConfig implements WebMvcConfigurer{
         configurer.enable();
     }
 
+    
+  @Bean
+    public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
+        return new RequestMappingHandlerAdapter();
+    }
     
 }

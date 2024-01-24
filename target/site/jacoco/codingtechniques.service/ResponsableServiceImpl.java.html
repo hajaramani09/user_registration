@@ -21,13 +21,13 @@ import codingtechniques.repositories.ResponsableRepositories;
 
     static {
         try {
-<span class="nc" id="L24">            Class.forName(&quot;com.mysql.cj.jdbc.driver&quot;); // Utilisez le driver JDBC correct pour MySQL</span>
+<span class="nc" id="L24">            Class.forName(&quot;com.mysql.cj.jdbc.driver&quot;); </span>
 <span class="nc" id="L25">        } catch (Exception e) {</span>
-<span class="nc" id="L26">            e.printStackTrace(); // Affichez l'exception pour le débogage</span>
-        }
+<span class="nc" id="L26">            e.printStackTrace(); </span>
+<span class="nc" id="L27">        }</span>
 <span class="nc" id="L28">    }</span>
 
-    // Ajoutez les informations de la base de données à l'URL
+   
 
     public void closeConnection(Connection connection) {
         try {
@@ -36,14 +36,14 @@ import codingtechniques.repositories.ResponsableRepositories;
             }
 <span class="nc" id="L37">        } catch (SQLException ex) {</span>
 <span class="nc" id="L38">            ex.printStackTrace();</span>
-        }
+<span class="nc" id="L39">        }</span>
 <span class="nc" id="L40">    }</span>
 
     @Autowired
     public ResponsableRepositories userInterface;
 
     public Integer getAuthUser() {
-<span class="nc" id="L46">        UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) SecurityContextHolder</span>
+        UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) SecurityContextHolder
 <span class="nc" id="L47">                .getContext().getAuthentication();</span>
 <span class="nc" id="L48">        return (Integer) auth.getPrincipal();</span>
     }

@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @RestController
-@RequestMapping(&quot;/reservation&quot;)
+
 
 @Component
 
@@ -39,33 +39,26 @@ import org.springframework.web.bind.annotation.RestController;
     @Autowired
     public Reservation reservation;
 
-   @GetMapping(&quot;/&quot;)
-
-    public String index(Model model) {
-<span class="nc" id="L45">        model.addAttribute(&quot;reservation&quot;, new Reservation());</span>
-<span class="nc" id="L46">        return &quot;index&quot;;</span>
-    }
-
    @GetMapping(&quot;/registerReservation&quot;)
     public ResponseEntity&lt;Reservation&gt; registerReservation(@ModelAttribute Reservation user, Model model) {
 
-<span class="nc" id="L52">        System.out.println(user.toString());</span>
+<span class="nc" id="L45">        System.out.println(user.toString());</span>
 
         // Validate
 
-<span class="nc" id="L56">        System.out.println(user.getId());</span>
-<span class="nc" id="L57">        System.out.println(user.getAdress());</span>
-<span class="nc" id="L58">        System.out.println(user.getDate());</span>
-<span class="nc" id="L59">        System.out.println(user.getphone());</span>
-<span class="nc" id="L60">        System.out.println(user.getEmail());</span>
-<span class="nc" id="L61">        System.out.println(user.getService());</span>
-<span class="nc" id="L62">        System.out.println(user.getname());</span>
-<span class="nc" id="L63">        System.out.println(user.getnote());</span>
+<span class="nc" id="L49">        System.out.println(user.getId());</span>
+<span class="nc" id="L50">        System.out.println(user.getAdress());</span>
+<span class="nc" id="L51">        System.out.println(user.getDate());</span>
+<span class="nc" id="L52">        System.out.println(user.getphone());</span>
+<span class="nc" id="L53">        System.out.println(user.getEmail());</span>
+<span class="nc" id="L54">        System.out.println(user.getService());</span>
+<span class="nc" id="L55">        System.out.println(user.getname());</span>
+<span class="nc" id="L56">        System.out.println(user.getnote());</span>
 
-<span class="nc" id="L65">        Reservation reservation_inserted = userInterface.save(user);</span>
-<span class="nc" id="L66">        model.addAttribute(&quot;message&quot;, reservation_inserted.getEmail() + &quot;inserted.&quot;);</span>
+<span class="nc" id="L58">        Reservation reservation_inserted = userInterface.save(user);</span>
+<span class="nc" id="L59">        model.addAttribute(&quot;message&quot;, reservation_inserted.getEmail() + &quot;inserted.&quot;);</span>
 
-<span class="nc" id="L68">        return new ResponseEntity&lt;Reservation&gt;(instanceService.addReservation(user), null, HttpStatus.CREATED);</span>
+<span class="nc" id="L61">        return new ResponseEntity&lt;Reservation&gt;(instanceService.addReservation(user), null, HttpStatus.CREATED);</span>
     }
 
     /*@GetMapping(&quot;/*&quot;)
@@ -83,8 +76,10 @@ import org.springframework.web.bind.annotation.RestController;
 
     @RequestMapping(method = RequestMethod.POST, value = &quot;/addReservation&quot;)
     public ResponseEntity&lt;Reservation&gt; addReservation(@Validated @RequestBody Reservation reservation) {
-<span class="nc" id="L86">        return new ResponseEntity&lt;Reservation&gt;(instanceService.addReservation(reservation), null, HttpStatus.OK);</span>
+<span class="nc" id="L79">        return new ResponseEntity&lt;Reservation&gt;(instanceService.addReservation(reservation), null, HttpStatus.OK);</span>
     }
+
+    
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
